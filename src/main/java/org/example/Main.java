@@ -1,13 +1,39 @@
 package org.example;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
    static User user = new User(0, 0, 0, "", "", 0, 0);
+   static ArrayList<FoodTime> lunch = new ArrayList<>();
     public static void main(String[] args) {
-        createUser();
-        calculateCalorieIntake();
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Выберите действие");
+            System.out.println("1. Зарегистрироватья");
+            System.out.println("2. Расчетать мою норму калорий");
+            System.out.println("3. Добавить прием пищи");
+            System.out.println("4. Посмотреть список приемов пищи");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    createUser();
+                    break;
+                case  2:
+                    calculateCalorieIntake();
+                    break;
+                case 3:
+                    eat();
+                    break;
+                case 4:
+                    showLunch();
+                    break;
+            }
+        }
+//        createUser();
+//        calculateCalorieIntake();
     }
 
      public static void createUser() {
@@ -90,5 +116,21 @@ public class Main {
             }
         }
         System.out.println(user.getCalorieNorm());
+    }
+
+    public static void eat() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите название блюда");
+        String foodName = sc.nextLine();
+        System.out.println("Введите количество съеденых калорий");
+        int thisCalories = sc.nextInt();
+        FoodTime newFoodTime = new FoodTime(foodName, thisCalories);
+        lunch.add(newFoodTime);
+    }
+
+    public static void showLunch() {
+        for(FoodTime foodTime : lunch) {
+            System.out.println(foodTime.getName() + ": " + foodTime.getCalorie() + " калорий");
+        }
     }
 }
