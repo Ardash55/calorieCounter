@@ -6,7 +6,9 @@ import java.util.ArrayList;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
    static User user = new User(0, 0, 0, "", "", 0, 0);
-   static ArrayList<FoodTime> lunch = new ArrayList<>();
+   static Meals breakfast = new Meals("Завтрак", 0);
+    static Meals lunch = new Meals("Обед", 0);
+    static Meals dinner = new Meals("Ужин", 0);
     public static void main(String[] args) {
         while (true) {
             Scanner sc = new Scanner(System.in);
@@ -27,9 +29,9 @@ public class Main {
                 case 3:
                     eat();
                     break;
-                case 4:
-                    showLunch();
-                    break;
+//                case 4:
+//                    showLunch();
+//                    break;
             }
         }
 //        createUser();
@@ -120,17 +122,44 @@ public class Main {
 
     public static void eat() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите название блюда");
-        String foodName = sc.nextLine();
-        System.out.println("Введите количество съеденых калорий");
-        int thisCalories = sc.nextInt();
-        FoodTime newFoodTime = new FoodTime(foodName, thisCalories);
-        lunch.add(newFoodTime);
-    }
-
-    public static void showLunch() {
-        for(FoodTime foodTime : lunch) {
-            System.out.println(foodTime.getName() + ": " + foodTime.getCalorie() + " калорий");
+        System.out.println("Выберите прием пищи");
+        System.out.println("1. Завтрак");
+        System.out.println("2. Обед");
+        System.out.println("3. Ужин");
+        int mealChoise = sc.nextInt();
+        if (mealChoise == 1) {
+            sc.nextLine();
+            System.out.println("Введите название блюда");
+            String mealName = sc.nextLine();
+            System.out.println("Введите количество калорий");
+            int mealCalories = sc.nextInt();
+            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
+            breakfast.addFood(newFoodTime);
+            System.out.println(breakfast.getCalories());
+        } else if(mealChoise == 2) {
+            sc.nextLine();
+            System.out.println("Введите название блюда");
+            String mealName = sc.nextLine();
+            System.out.println("Введите количество калорий");
+            int mealCalories = sc.nextInt();
+            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
+            lunch.addFood(newFoodTime);
+            System.out.println(lunch.getCalories());
+        } else if(mealChoise == 3) {
+            sc.nextLine();
+            System.out.println("Введите название блюда");
+            String mealName = sc.nextLine();
+            System.out.println("Введите количество калорий");
+            int mealCalories = sc.nextInt();
+            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
+            dinner.addFood(newFoodTime);
+            System.out.println(dinner.getCalories());
         }
     }
+
+//    public static void showLunch() {
+//        for(FoodTime foodTime : lunch) {
+//            System.out.println(foodTime.getName() + ": " + foodTime.getCalorie() + " калорий");
+//        }
+//    }
 }
