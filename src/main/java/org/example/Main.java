@@ -9,9 +9,14 @@ public class Main {
    static Meals breakfast = new Meals("Завтрак", 0);
     static Meals lunch = new Meals("Обед", 0);
     static Meals dinner = new Meals("Ужин", 0);
+    static double totalEatenCalories;
+    static double freeCalories;
     public static void main(String[] args) {
         while (true) {
+            freeCalories = user.getCalorieNorm() - totalEatenCalories;
             Scanner sc = new Scanner(System.in);
+            System.out.println("Съеденно калорий - " + totalEatenCalories);
+            System.out.println("Осталось калорий - " + freeCalories);
             System.out.println("Выберите действие");
             System.out.println("1. Зарегистрироватья");
             System.out.println("2. Расчетать мою норму калорий");
@@ -136,6 +141,11 @@ public class Main {
             FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
             breakfast.addFood(newFoodTime);
             System.out.println(breakfast.getCalories());
+            if(totalEatenCalories == 0) {
+                totalEatenCalories = mealCalories;
+            } else {
+                totalEatenCalories = totalEatenCalories  + mealCalories;
+            }
         } else if(mealChoise == 2) {
             sc.nextLine();
             System.out.println("Введите название блюда");
@@ -145,6 +155,11 @@ public class Main {
             FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
             lunch.addFood(newFoodTime);
             System.out.println(lunch.getCalories());
+            if(totalEatenCalories == 0) {
+                totalEatenCalories = mealCalories;
+            } else {
+                totalEatenCalories = totalEatenCalories + mealCalories;
+            }
         } else if(mealChoise == 3) {
             sc.nextLine();
             System.out.println("Введите название блюда");
@@ -154,6 +169,11 @@ public class Main {
             FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
             dinner.addFood(newFoodTime);
             System.out.println(dinner.getCalories());
+            if(totalEatenCalories == 0) {
+                totalEatenCalories = mealCalories;
+            } else {
+                totalEatenCalories = totalEatenCalories + mealCalories;
+            }
         }
     }
 
