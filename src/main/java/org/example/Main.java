@@ -21,26 +21,14 @@ public class Main {
             System.out.println("1. Зарегистрироватья");
             System.out.println("2. Расчетать мою норму калорий");
             System.out.println("3. Добавить прием пищи");
-            System.out.println("4. Посмотреть список приемов пищи");
             int choice = sc.nextInt();
 
             switch (choice) {
-                case 1:
-                    createUser();
-                    break;
-                case  2:
-                    calculateCalorieIntake();
-                    break;
-                case 3:
-                    eat();
-                    break;
-//                case 4:
-//                    showLunch();
-//                    break;
+                case 1 -> createUser();
+                case 2 -> calculateCalorieIntake();
+                case 3 -> eat();
             }
         }
-//        createUser();
-//        calculateCalorieIntake();
     }
 
      public static void createUser() {
@@ -105,20 +93,20 @@ public class Main {
 
     public static void calculateCalorieIntake() {
         double calorieNorm;
-        if (user.getSex() == "male") {
+        if (user.getSex().equals("male")) {
              calorieNorm = (((10 * user.getWeight()) + (6.25 * user.getHeight()) - (5 * user.getAge()) + 5) * user.getActivity());
              user.setCalorieNorm(calorieNorm);
-             if (user.getGoal() == "loseWeight") {
+             if (user.getGoal().equals("loseWeight")) {
                  user.setCalorieNorm(user.getCalorieNorm() - (user.getCalorieNorm() * 0.15));
-             } else if (user.getGoal() == "gainWeight") {
+             } else if (user.getGoal().equals("gainWeight")) {
                  user.setCalorieNorm(user.getCalorieNorm() + (user.getCalorieNorm() * 0.15));
              }
-        } else if (user.getSex() == "female") {
+        } else if (user.getSex().equals("female")) {
              calorieNorm = (((10 * user.getWeight()) + (6.25 * user.getHeight()) - (5 * user.getAge()) + - 161) * user.getActivity());
              user.setCalorieNorm(calorieNorm);
-            if (user.getGoal() == "loseWeight") {
+            if (user.getGoal().equals("loseWeight")) {
                 user.setCalorieNorm(user.getCalorieNorm() - (user.getCalorieNorm() * 0.15));
-            } else if (user.getGoal() == "gainWeight") {
+            } else if (user.getGoal().equals("gainWeight")) {
                 user.setCalorieNorm(user.getCalorieNorm() + (user.getCalorieNorm() * 0.15));
             }
         }
@@ -132,54 +120,22 @@ public class Main {
         System.out.println("2. Обед");
         System.out.println("3. Ужин");
         int mealChoise = sc.nextInt();
-        if (mealChoise == 1) {
-            sc.nextLine();
-            System.out.println("Введите название блюда");
-            String mealName = sc.nextLine();
-            System.out.println("Введите количество калорий");
-            int mealCalories = sc.nextInt();
-            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
-            breakfast.addFood(newFoodTime);
-            System.out.println(breakfast.getCalories());
-            if(totalEatenCalories == 0) {
-                totalEatenCalories = mealCalories;
-            } else {
-                totalEatenCalories = totalEatenCalories  + mealCalories;
-            }
-        } else if(mealChoise == 2) {
-            sc.nextLine();
-            System.out.println("Введите название блюда");
-            String mealName = sc.nextLine();
-            System.out.println("Введите количество калорий");
-            int mealCalories = sc.nextInt();
-            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
-            lunch.addFood(newFoodTime);
-            System.out.println(lunch.getCalories());
-            if(totalEatenCalories == 0) {
-                totalEatenCalories = mealCalories;
-            } else {
-                totalEatenCalories = totalEatenCalories + mealCalories;
-            }
-        } else if(mealChoise == 3) {
-            sc.nextLine();
-            System.out.println("Введите название блюда");
-            String mealName = sc.nextLine();
-            System.out.println("Введите количество калорий");
-            int mealCalories = sc.nextInt();
-            FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
-            dinner.addFood(newFoodTime);
-            System.out.println(dinner.getCalories());
-            if(totalEatenCalories == 0) {
-                totalEatenCalories = mealCalories;
-            } else {
-                totalEatenCalories = totalEatenCalories + mealCalories;
-            }
+        switch (mealChoise) {
+            case 1 -> addFoodToMeal(breakfast);
+            case 2 -> addFoodToMeal(lunch);
+            case 3 -> addFoodToMeal(dinner);
         }
     }
 
-//    public static void showLunch() {
-//        for(FoodTime foodTime : lunch) {
-//            System.out.println(foodTime.getName() + ": " + foodTime.getCalorie() + " калорий");
-//        }
-//    }
+    public static void addFoodToMeal(Meals meal) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите название блюда:");
+        String mealName = sc.nextLine();
+        System.out.println("Введите количество калорий:");
+        int mealCalories = sc.nextInt();
+        FoodTime newFoodTime = new FoodTime(mealName, mealCalories);
+        meal.addFood(newFoodTime);
+        totalEatenCalories += mealCalories;
+    }
+
 }
