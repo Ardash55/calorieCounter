@@ -1,6 +1,7 @@
 package org.example;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     private int age;
     private int weight;
     private int height;

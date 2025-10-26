@@ -1,6 +1,14 @@
 package org.example;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.io.ObjectOutputStream;
+//import java.io.FileOutputStream;
 
 public class CalorieApp {
     static User user = new User(0, 0, 0, "", "", 0, 0);
@@ -19,6 +27,7 @@ public class CalorieApp {
             System.out.println("1. Зарегистрироватья");
             System.out.println("2. Расчетать мою норму калорий");
             System.out.println("3. Добавить прием пищи");
+            System.out.println("Вес - " + user.getWeight());
             int choice = sc.nextInt();
 
             switch (choice) {
@@ -177,10 +186,22 @@ public class CalorieApp {
         user.setSex(sex);
         user.setGoal(goal);
         user.setActivity(activity);
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
+            oos.writeObject(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
     public static void calculateCalorieIntake() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("user.dat"))) {
+            user = (User) ois.readObject();
+            System.out.println("Десериализованный объект: " + user);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         double calorieNorm;
         if (user.getSex().equals("male")) {
             calorieNorm = (((10 * user.getWeight()) + (6.25 * user.getHeight()) - (5 * user.getAge()) + 5) * user.getActivity());
