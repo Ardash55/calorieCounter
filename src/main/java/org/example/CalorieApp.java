@@ -16,6 +16,7 @@ public class CalorieApp {
     static double freeCalories;
     public static void start() {
         while (true) {
+            calculateCalorieIntake();
             freeCalories = user.getCalorieNorm() - thisDay.getTotalEatenCalories();
             Scanner sc = new Scanner(System.in);
             System.out.println("Съеденно калорий - " + thisDay.getTotalEatenCalories());
@@ -217,6 +218,5 @@ public class CalorieApp {
                 user.setCalorieNorm(user.getCalorieNorm() + (user.getCalorieNorm() * 0.15));
             }
         }
-        System.out.println(user.getCalorieNorm());
     }
 }
