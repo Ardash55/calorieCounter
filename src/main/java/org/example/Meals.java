@@ -25,4 +25,11 @@ public class Meals {
         this.foodTimes.add(foodTime);
         this.calories = this.calories + foodTime.getCalorie();
     }
+
+    public void showFoodtimes() {
+        System.out.println("Список съеденного за " + getName() + ":");
+        for (FoodTime foodTime: foodTimes) {
+            System.out.println(foodTime.getName() + " - " + foodTime.getCalorie());
+        }
+    }
 }

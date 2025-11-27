@@ -79,4 +79,16 @@ public class ThisDay implements Serializable  {
             }
         }
     }
+
+    void showBreakfast() {
+        breakfast.showFoodtimes();
+    }
+
+    void showLunch() {
+        lunch.showFoodtimes();
+    }
+
+    void showDinner() {
+        dinner.showFoodtimes();
+    }
  }
