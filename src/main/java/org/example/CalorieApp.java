@@ -11,16 +11,14 @@ import java.io.FileInputStream;
 //import java.io.FileOutputStream;
 
 public class CalorieApp {
-    static User user = new User(0, 0, 0, "", "", 0, 0);
-    static ThisDay thisDay = new ThisDay();
-    static double freeCalories;
-    public static void start() {
-        while (true) {
+    private User user = new User(0, 0, 0, "", "", 0, 0);
+    private ThisDay thisDay = new ThisDay();
+    private double freeCalories;
+    public void start() {
             menu();
-        }
     }
 
-    public static void menu() {
+    public void menu() {
         calculateCalorieIntake();
         freeCalories = user.getCalorieNorm() - thisDay.getTotalEatenCalories();
         Scanner sc = new Scanner(System.in);
@@ -31,15 +29,22 @@ public class CalorieApp {
         System.out.println("");
         System.out.println("1. Пользователь");
         System.out.println("2. Сегодня");
+        System.out.println("0. Выход");
         int choice = sc.nextInt();
 
         switch (choice) {
             case 1 -> userMenu();
             case 2 -> todayMenu();
+            case 0 -> exit();
         }
     }
 
-    public static void userMenu() {
+    public void exit() {
+        System.out.println("До встречи");
+        System.exit(0);
+    }
+
+    public void userMenu() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("1. Изменить мои данные");
@@ -50,11 +55,11 @@ public class CalorieApp {
         switch (choice) {
             case 1 -> changeMyDate();
             case 2 -> showMyDate();
-            case 3 -> menu();
+            case 0 -> menu();
         }
     }
 
-    public static void todayMenu() {
+    public void todayMenu() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("1. Добавить прием пищи");
@@ -73,7 +78,7 @@ public class CalorieApp {
         }
     }
 
-    public static void changeMyDate() {
+    public void changeMyDate() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Что вы хотите изменить?");
@@ -97,7 +102,7 @@ public class CalorieApp {
         }
     }
 
-    public static void setAge() {
+    public void setAge() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введите ваш возраст");
@@ -113,7 +118,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void setWeight() {
+    public void setWeight() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введите ваш вес");
@@ -129,7 +134,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void setHeight() {
+    public void setHeight() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введите ваш рост");
@@ -145,7 +150,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void setSex() {
+    public void setSex() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введите ваш пол");
@@ -170,7 +175,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void setGoal() {
+    public void setGoal() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Выберите цель");
         System.out.println("1. Похудеть");
@@ -195,7 +200,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void setActivityLevel() {
+    public void setActivityLevel() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Выберите уровень активности");
         System.out.println("1. Сидячий образ жизни");
@@ -227,8 +232,8 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void showMyDate() {
-        System.out.println("Ваш возраст - " + user.getGoal());
+    public void showMyDate() {
+        System.out.println("Ваш возраст - " + user.getAge());
         System.out.println("Ваш вес - " + user.getWeight());
         System.out.println("Ваш рост - " + user.getHeight());
         System.out.println("Ваш пол - " + user.getSex());
@@ -236,7 +241,7 @@ public class CalorieApp {
         System.out.println("Ваш уровень активности - " + user.getActivity());
     }
 
-    public static void createUser() {
+    public void createUser() {
         Scanner sc = new Scanner(System.in);
         int age = 0;
         int weight = 0;
@@ -393,7 +398,7 @@ public class CalorieApp {
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
-    public static void calculateCalorieIntake() {
+    public void calculateCalorieIntake() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("user.dat"))) {
             user = (User) ois.readObject();
             System.out.println("Десериализованный объект: " + user);
