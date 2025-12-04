@@ -11,11 +11,14 @@ import java.io.FileInputStream;
 //import java.io.FileOutputStream;
 
 public class CalorieApp {
-    private User user = new User(0, 0, 0, "", "", 0, 0);
+    public static User user = new User(0, 0, 0, "", "", 0, 0);
     private ThisDay thisDay = new ThisDay();
     private double freeCalories;
+    FileManager fileManager = new FileManager();
     public void start() {
+        while (true) {
             menu();
+        }
     }
 
     public void menu() {
@@ -107,14 +110,8 @@ public class CalorieApp {
 
         System.out.println("Введите ваш возраст");
         int newAge = sc.nextInt();
-
         user.setAge(newAge);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -125,12 +122,7 @@ public class CalorieApp {
         int newWeight = sc.nextInt();
 
         user.setWeight(newWeight);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -141,12 +133,7 @@ public class CalorieApp {
         int newHeight = sc.nextInt();
 
         user.setHeight(newHeight);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -166,12 +153,7 @@ public class CalorieApp {
         }
 
         user.setSex(newSex);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -191,12 +173,7 @@ public class CalorieApp {
             goal = "gainWeight";
         }
         user.setGoal(goal);
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -224,11 +201,7 @@ public class CalorieApp {
         }
 
         user.setActivity(activity);
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
@@ -390,11 +363,7 @@ public class CalorieApp {
         user.setGoal(goal);
         user.setActivity(activity);
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.dat"))){
-            oos.writeObject(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileManager.saveUser();
         System.out.println(user.getSex() + " " +  user.getAge() + " " + user.getHeight() + " " + user.getGoal() + " " + user.getWeight() + " " +user.getActivity());
     }
 
