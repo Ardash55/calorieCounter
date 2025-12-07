@@ -61,90 +61,164 @@ public class User implements Serializable {
     }
 
     public void setAge() {
-        System.out.println("Введите ваш возраст");
-        int newAge = sc.nextInt();
-        this.age = newAge;
-        System.out.println("Твой возраст " + this.age + " лет");
-        this.setCalorieNorm();
-        fileManager.saveUser();
+        int newAge;
+        while (true) {
+            try {
+                System.out.println("Введите ваш возраст");
+                newAge = sc.nextInt();
+                this.age = newAge;
+
+                if (newAge <= 0) {
+                    System.out.println("Возраст должен быть больше нуля");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Возраст должен быть числом");
+                sc.nextLine();
+            }
+        }
     }
 
     public void setWeight() {
-        System.out.println("Введите ваш вес");
-        int newWeight = sc.nextInt();
-        this.weight = newWeight;
-        System.out.println("Твой вес " + this.weight + " кг");
-        this.setCalorieNorm();
-        fileManager.saveUser();
+
+        while (true) {
+            int newWeight;
+            try {
+                System.out.println("Введите ваш вес");
+                newWeight = sc.nextInt();
+                this.weight = newWeight;
+
+                if (newWeight <= 0) {
+                    System.out.println("Вес должен быть больше нуля");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Вес должен быть числом");
+                sc.nextLine();
+            }
+        }
     }
 
     public void setHeight() {
-        System.out.println("Введите ваш рост");
-        int newHeight = sc.nextInt();
-        this.height = newHeight;
-        System.out.println("Твой рост " + this.height + " см");
-        this.setCalorieNorm();
-        fileManager.saveUser();
+        while (true) {
+            int newHeight;
+            try {
+                System.out.println("Введите ваш рост");
+                newHeight = sc.nextInt();
+                this.height = newHeight;
+
+                if (newHeight <= 0) {
+                    System.out.println("Рост должен быть больше нуля");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Вес должен быть числом");
+                sc.nextLine();
+            }
+        }
     }
 
     public void setSex() {
-        System.out.println("Введите ваш пол");
-        System.out.println("1. Мужской");
-        System.out.println("2. Женский");
-        int choice = sc.nextInt();
-        String newSex = "";
-        if (choice == 1) {
-            newSex = "male";
-        } else if(choice == 2) {
-            newSex = "female";
+        while (true) {
+            int sexChoice;
+            try {
+                System.out.println("Выберите ваш пол");
+                System.out.println("1. Мужской");
+                System.out.println("2. Женский");
+                sexChoice = sc.nextInt();
+                if (sexChoice == 1) {
+                    sex = "male";
+                } else if (sexChoice == 2) {
+                    sex = "female";
+                }
+
+                if (sexChoice != 1 && sexChoice != 2) {
+                    System.out.println("Выберите из двух имеющихся опций");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Введите число");
+                sc.nextLine();
+            }
         }
-        this.sex = newSex;
-        this.setCalorieNorm();
-        fileManager.saveUser();
     }
 
     public void setGoal() {
-        System.out.println("Выберите цель");
-        System.out.println("1. Похудеть");
-        System.out.println("2. Поддерживать вес");
-        System.out.println("3. Набрать вес");
-        int choice = sc.nextInt();
-        String goal = "";
-        if(choice == 1) {
-            goal = "loseWeight";
-        } else if(choice == 2) {
-            goal = "maintainWeight";
-        } else if(choice == 3) {
-            goal = "gainWeight";
+        while (true) {
+            try {
+                System.out.println("Выберите цель");
+                System.out.println("1. Похудеть");
+                System.out.println("2. Поддерживать вес");
+                System.out.println("3. Набрать вес");
+                int goalChoice = sc.nextInt();
+                if(goalChoice == 1) {
+                    goal = "loseWeight";
+                } else if(goalChoice == 2) {
+                    goal = "maintainWeight";
+                } else if(goalChoice == 3) {
+                    goal = "gainWeight";
+                }
+
+                if(goalChoice != 1 && goalChoice != 2 && goalChoice != 3) {
+                    System.out.println("Выберите цель из этих трех вариантов");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Введите число");
+                sc.nextLine();
+            }
         }
-        this.goal = goal;
-        this.setCalorieNorm();
-        fileManager.saveUser();
     }
 
     public void setActivity() {
-        System.out.println("Выберите уровень активности");
-        System.out.println("1. Сидячий образ жизни");
-        System.out.println("2. Низкий уровень активности");
-        System.out.println("3. Умеренная активность");
-        System.out.println("4. Высокая активность");
-        System.out.println("5. Очень высокая активность");
-        int activityChoise = sc.nextInt();
-        double activity = 0;
-        if(activityChoise == 1) {
-            activity = 1.2;
-        } else if(activityChoise == 2) {
-            activity = 1.375;
-        } else if (activityChoise == 3) {
-            activity = 1.55;
-        } else if (activityChoise == 4) {
-            activity = 1.725;
-        } else if (activityChoise == 5) {
-            activity = 1.9;
+        while (true) {
+            try {
+                System.out.println("Выберите уровень активности");
+                System.out.println("1. Сидячий образ жизни");
+                System.out.println("2. Низкий уровень активности");
+                System.out.println("3. Умеренная активность");
+                System.out.println("4. Высокая активность");
+                System.out.println("5. Очень высокая активность");
+                int activityChoise = sc.nextInt();
+                if(activityChoise == 1) {
+                    activity = 1.2;
+                } else if(activityChoise == 2) {
+                    activity = 1.375;
+                } else if (activityChoise == 3) {
+                    activity = 1.55;
+                } else if (activityChoise == 4) {
+                    activity = 1.725;
+                } else if (activityChoise == 5) {
+                    activity = 1.9;
+                }
+
+                if(activityChoise != 1 && activityChoise != 2 && activityChoise != 3 && activityChoise != 4 && activityChoise != 5) {
+                    System.out.println("Выберите один из пяти указанных уровней активности");
+                    continue;
+                }
+                fileManager.saveUser();
+                this.setCalorieNorm();
+                break;
+            } catch (Exception e) {
+                System.out.println("Введите число");
+                sc.nextLine();
+            }
         }
-        this.activity = activity;
-        this.setCalorieNorm();
-        fileManager.saveUser();
     }
 
     public void setCalorieNorm() {
