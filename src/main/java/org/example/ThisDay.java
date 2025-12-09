@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ThisDay implements Serializable  {
+    Scanner sc = new Scanner(System.in);
     private LocalDate today;
     private Meals breakfast;
     private Meals lunch;
@@ -29,7 +30,6 @@ public class ThisDay implements Serializable  {
     }
 
     void eat() {
-        Scanner sc = new Scanner(System.in);
         while (true)
             try {
                 System.out.println("Выберите прием пищи");
@@ -56,8 +56,8 @@ public class ThisDay implements Serializable  {
     }
 
     void addFoodToMeal(Meals meal) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Введите название блюда:");
+        sc.nextLine();
         String mealName = sc.nextLine();
         System.out.println("Введите количество калорий:");
         while (true) {
@@ -90,5 +90,9 @@ public class ThisDay implements Serializable  {
 
     void showDinner() {
         dinner.showFoodtimes();
+    }
+
+    LocalDate getToday() {
+        return this.today;
     }
  }

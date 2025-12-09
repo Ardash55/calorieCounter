@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 
 public class CalorieApp {
     public static User user = new User(0, 0, 0, "", "", 0, 0);
+    public Days days = new Days();
     private ThisDay thisDay = new ThisDay();
     private double freeCalories;
     FileManager fileManager = new FileManager();
