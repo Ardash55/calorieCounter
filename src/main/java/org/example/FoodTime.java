@@ -1,6 +1,8 @@
 package org.example;
 
-public class FoodTime {
+import java.io.Serializable;
+
+public class FoodTime implements Serializable {
     private String name;
     private int calorie;
 

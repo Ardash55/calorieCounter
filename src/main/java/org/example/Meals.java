@@ -1,8 +1,9 @@
 package org.example;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Meals {
+public class Meals implements Serializable {
     private String name;
     private int calories;
     private List<FoodTime> foodTimes;

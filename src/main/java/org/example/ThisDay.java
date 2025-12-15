@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ThisDay implements Serializable  {
-    Scanner sc = new Scanner(System.in);
+    private transient Scanner sc = new Scanner(System.in);
     private LocalDate today;
     private Meals breakfast;
     private Meals lunch;

@@ -12,16 +12,23 @@ import java.io.FileOutputStream;
 
 public class CalorieApp {
     public static User user = new User(0, 0, 0, "", "", 0, 0);
-    public Days days = new Days();
-    private ThisDay thisDay = new ThisDay();
+    public static Days days = new Days();
+    ThisDay thisDay = days.getToday();
     private double freeCalories;
     FileManager fileManager = new FileManager();
 
     public void start() {
         User loaded = fileManager.loadUser();
+        Days loadedDays = fileManager.loadDays();
         if (loaded != null) {
             user = loaded;
         }
+
+        if (loadedDays != null) {
+            days = loadedDays;
+        }
+
+
 
         user.initTransient();
 
@@ -87,6 +94,7 @@ public class CalorieApp {
             case 4 -> thisDay.showDinner();
             case 0 -> menu();
         }
+        fileManager.saveDays();
     }
 
     public void changeMyDate() {
