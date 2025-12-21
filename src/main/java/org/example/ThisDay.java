@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ThisDay implements Serializable  {
-    private transient Scanner sc = new Scanner(System.in);
+    private transient Scanner sc;
     private LocalDate today;
     private Meals breakfast;
     private Meals lunch;
@@ -28,6 +28,11 @@ public class ThisDay implements Serializable  {
     double getTotalEatenCalories() {
         return totalEatenCalories;
     }
+
+    public void initTransient() {
+        this.sc = new Scanner(System.in);
+    }
+
 
     void eat() {
         while (true)

@@ -47,4 +47,8 @@ public class Days implements Serializable {
             System.out.println(day.getTotalEatenCalories());
         }
     }
+
+    public void save() {
+        fileManager.saveDays();
+    }
 }
