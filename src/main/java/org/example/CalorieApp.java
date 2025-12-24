@@ -49,12 +49,14 @@ public class CalorieApp {
         System.out.println("");
         System.out.println("1. Пользователь");
         System.out.println("2. Сегодня");
+        System.out.println("3. Показать историю дней");
         System.out.println("0. Выход");
         int choice = sc.nextInt();
 
         switch (choice) {
             case 1 -> userMenu();
             case 2 -> todayMenu();
+            case 3 -> showDaysStory();
             case 0 -> exit();
         }
     }
@@ -97,6 +99,10 @@ public class CalorieApp {
             case 0 -> menu();
         }
        days.save();
+    }
+
+    public void showDaysStory() {
+        days.getDaysList();
     }
 
     public void changeMyDate() {

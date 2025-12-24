@@ -44,7 +44,7 @@ public class Days implements Serializable {
         }
 
         for (ThisDay day : daysList) {
-            System.out.println(day.getTotalEatenCalories());
+            System.out.println(day.getToday() + " - " + day.getTotalEatenCalories() + " ккал");
         }
     }
 
