@@ -11,8 +11,8 @@ import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 
 public class CalorieApp {
-    public static User user = new User(0, 0, 0, "", "", 0, 0);
-    public static Days days = new Days();
+    public static User user;
+    public static Days days;
     private double freeCalories;
     private ThisDay thisDay;
     FileManager fileManager = new FileManager();
@@ -102,7 +102,10 @@ public class CalorieApp {
     }
 
     public void showDaysStory() {
-        days.getDaysList();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Сколько дней вывести?");
+        int daysCount = sc.nextInt();
+        days.getDaysList(daysCount);
     }
 
     public void changeMyDate() {

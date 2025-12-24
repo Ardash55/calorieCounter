@@ -37,13 +37,15 @@ public class Days implements Serializable {
         fileManager.saveDays();
     }
 
-    public void getDaysList() {
+    public void getDaysList(int daysCount) {
         if(daysList.isEmpty()) {
             System.out.println("Лист пуст");
             return;
         }
 
-        for (ThisDay day : daysList) {
+        for (int i = daysList.size() - 10; i < daysList.size(); i++) {
+            if (i < 0) continue;
+            ThisDay day = daysList.get(i);
             System.out.println(day.getToday() + " - " + day.getTotalEatenCalories() + " ккал");
         }
     }
