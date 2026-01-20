@@ -2,6 +2,7 @@ package org.example;
 //mvn clean compile exec:java -Dexec.mainClass=org.example.MainFX
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -39,8 +40,19 @@ public class MainFX extends Application {
         Label eatenCalorieUI = new Label("Съедено " + thisDay.getTotalEatenCalories() + " калорий");
         Label freeCaloriesUI = new Label("Осталось калорий " + freeCalories);
 
+        Button userButton = new Button("Пользователь");
+        Button todayButton = new Button("Сегодня");
+        Button showDayLog = new Button("Показать историю дней");
+
         VBox root = new VBox();
-        root.getChildren().addAll(calorieNormUI, eatenCalorieUI, freeCaloriesUI);
+
+        VBox textMenu = new VBox();
+        textMenu.getChildren().addAll(calorieNormUI, eatenCalorieUI, freeCaloriesUI);
+
+        VBox menuButton = new VBox();
+        menuButton.getChildren().addAll(userButton, todayButton, showDayLog);
+
+        root.getChildren().addAll(textMenu, menuButton);
 
         Scene scene = new Scene(root, 400, 200);
 
