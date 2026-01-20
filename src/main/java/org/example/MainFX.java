@@ -32,12 +32,15 @@ public class MainFX extends Application {
         days.initTransient();
         thisDay.initTransient();
 
+        freeCalories = user.getCalorieNorm() - thisDay.getTotalEatenCalories();
+
 
         Label calorieNormUI = new Label("Норма калорий " + user.getCalorieNorm());
         Label eatenCalorieUI = new Label("Съедено " + thisDay.getTotalEatenCalories() + " калорий");
+        Label freeCaloriesUI = new Label("Осталось калорий " + freeCalories);
 
         VBox root = new VBox();
-        root.getChildren().addAll(calorieNormUI, eatenCalorieUI);
+        root.getChildren().addAll(calorieNormUI, eatenCalorieUI, freeCaloriesUI);
 
         Scene scene = new Scene(root, 400, 200);
 
