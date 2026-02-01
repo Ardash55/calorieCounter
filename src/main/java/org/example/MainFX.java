@@ -8,60 +8,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
-    public static User user;
-    public static Days days;
-    private double freeCalories;
-    public static ThisDay thisDay;
-    FileManager fileManager = new FileManager();
 
     @Override
     public void start(Stage stage) {
-        User loaded = fileManager.loadUser();
-        Days loadedDays = fileManager.loadDays();
-
-        if (loadedDays != null) {
-            days = loadedDays;
-        }
-
-        thisDay = days.getToday();
-
-        if (loaded != null) {
-            user = loaded;
-        }
-
-        user.initTransient();
-        days.initTransient();
-        thisDay.initTransient();
-
-        freeCalories = user.getCalorieNorm() - thisDay.getTotalEatenCalories();
-
-
-        Label calorieNormUI = new Label("Норма калорий " + user.getCalorieNorm());
-        Label eatenCalorieUI = new Label("Съедено " + thisDay.getTotalEatenCalories() + " калорий");
-        Label freeCaloriesUI = new Label("Осталось калорий " + freeCalories);
-
-        Button userButton = new Button("Пользователь");
-        Button todayButton = new Button("Сегодня");
-        Button showDayLog = new Button("Показать историю дней");
-
-        VBox root = new VBox();
-
-        VBox textMenu = new VBox();
-        textMenu.getChildren().addAll(calorieNormUI, eatenCalorieUI, freeCaloriesUI);
-
-        VBox menuButton = new VBox();
-        menuButton.getChildren().addAll(userButton, todayButton, showDayLog);
-
-        root.getChildren().addAll(textMenu, menuButton);
-
-        Scene scene = new Scene(root, 400, 200);
-
-        stage.setTitle("Test");
+        MenuFX menuFX = new MenuFX();
+        Scene scene = new Scene(menuFX.getRoot(), 800, 600);
         stage.setScene(scene);
+        stage.setTitle("чисто тест");
         stage.show();
     }
 
     public static void main(String[] args) {
-        Application.launch(args);
+        launch();
     }
 }
